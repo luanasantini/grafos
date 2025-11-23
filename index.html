@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estruturas de Dados & Algoritmos</title>
+    <link rel="stylesheet" href="styles.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Quicksand:wght@300;400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>Arvóres binárias </h1>
+        <p class="subtitle">Algoritmos e complexidade</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#arvores">Árvores</a></li>
+            <li><a href="#arvoresbinarias">Árvores Binárias</a></li>
+            <li><a href="#arvoresbuscabinaria">Árvores Binárias de Busca</a></li>
+            <li><a href="#percursoarvores">Percurso em Árvores</a></li>
+            <li><a href="#operacoes">Operações</a></li>
+            <li><a href="#arvoreavl">Árvore AVL</a></li>
+            <li><a href="#balanceamento">Balanceamento</a></li>
+        </ul>
+    </nav>
+
+    <main>
+
+        <section id="arvores" class="topic">
+            <h2>✨ Árvores</h2>
+            <p>Arvores são estruturas de dados hierárquicas nas quais os dados são armazenados por nós conectados por
+                arestas, representando relações pai-filho. Elas são amplamente utilizadas em ciência da computação para
+                organizar dados de forma eficiente, permitindo operações rápidas de busca, inserção e remoção.
+                <br>
+                <div class="split-content">
+                    <div class="content-left">
+                        <h3 class="content-title">Características Principais:</h3>
+                        • O primeiro nó é chamado de nó raiz. Este nó não tem um nó pai e serve como o ponto de origem
+                        para
+                        todos os outros nós da árvore<br>
+                        • Os nós folha, ou terminais, são os nós que não têm filhos. Eles representam as extremidades
+                        dos
+                        ramos da árvore, constituindo o final de um caminho específico.<br>
+                        • Nós que têm pelo menos um filho são chamados de nós internos. Estes constituem os pontos de
+                        bifurcação na árvore, representando decisões ou ramificações na estrutura.<br>
+                        • A forma mais comum de representar uma árvore em memória é utilizando alocação dinâmica,
+                        utilizando
+                        uma referência para sua raiz que guarda a chave (dado) e uma referência para a raiz das
+                        subárvores
+                        esquerda e direita.<br>
+                        • Árvores são estruturas de dados muito versáteis e a abstração mais utilizada para representar
+                        o nó
+                        de uma árvore é o agregado heterogêneo, comumente chamado de <b>registro (record)</b> ou
+                        <b>estrutura (struct)</b> nas linguagens de programação. O agregado heterogêneo é capaz de
+                        armazenar
+                        objetos de dados de tipos diferentes acessando-os através do mesmo identificador e
+                        distinguindo-os
+                        através de um seletor.<br>
+                        <div class="image-container">
+                            <img src="https://lh7-us.googleusercontent.com/jECv80Ugul9kfFG0vTF6qGin4EwN3_fkIGnOf_ah0b-1gmLl9hifVlwTE5RE4fwUhluWIgfL2HHq5HxSXVFGd06SVxzTD0cCyK0bbZeSmLB6pRXxDjdq7kkhWLZcnHTBZiaIGgPakg1l3nfFp_wQk3O4OAa9f1hRaq6vRjILH4AF6ULhB_yNM4CjngdVag"
+                                alt="Estrutura de Árvore Binária" class="tree-image">
+                        </div>
+                        <center>A altura de uma árvore é a profundidade máxima de um nó da árvore.</center><br>
+
+
+                    </div>
+                </div>
+            </p>
+
+            <div class="code-examples">
+                <div class="code-block">
+                    <h3>Estrutura de Árvore</h3>
+                    <div class="image-container">
+                        <img src="https://pythonhelp.wordpress.com/wp-content/uploads/2015/01/image06.png"
+                            alt="Estrutura de Árvore Binária" class="tree-image">
+                    </div>
+                    Na figura acima, o nó raiz é o 8, e ele tem como filhos os nós de chave 4, 2, 9 e 1. O nó 4 é pai
+                    dos nós 6 e 7. Estes dois, assim como os nós de chave 5, 2 e 1, são chamados de folhas por não terem
+                    filhos (ou seja, seus filhos são nulos).
+                    <div class="image-container">
+                        <img src="https://lh7-us.googleusercontent.com/WOjfHPnu_65FACqq3x14bMcGMaVGba0MlQ2-ZSRB5VVdZ9TO98HJbkVy998cF2dk_ZFQhyuK9U-5ZQNOEgxSVNwyP4YAgkLzGyWxCAI2zYAa3n4KRJrbfkRzf1hRLc3MAI3fIo5JXG9W9T9sIe-YT7Ljie9bhZyaE5v9zwAHeHcp_xfUsLkUeWMvL3inMA"
+                            alt="Estrutura de Árvore Binária" class="tree-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="arvoresbinarias" class="topic">
+            <h2>✨ Árvores Binárias</h2>
+            <p>Uma árvore binária é um tipo especial de árvore onde cada nó tem no máximo dois filhos: um filho esquerdo
+                e um filho direito. É uma das estruturas de dados mais fundamentais em computação.
+                <br>
+                <div class="image-container">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg9Ho7ZYW5fMMsQsrrZgzXh5eCv6r-mdgv5hEgps0akglNfNAISeJe67z4_7mQAWAFsHn39fyN0U8spTspM4KvHKHUaiuLLSavJ3CY3uQErm9cG3pMOwA_daw8X92xWG85sPmzttvbYgw/s1600/tiposDeArvoreBinaria.png"
+                        alt="Estrutura de Árvore Binária" class="tree-image">
+                </div>
+                <div class="split-content">
+                    <div class="content-left">
+                        <h3 class="content-title">Características Principais:</h3>
+                        • O filho à esquerda e o filho à direita são distintos, permitindo que a árvore cresça de
+                        maneira
+                        organizada<br>
+                        • Cada nó, exceto o nó raiz, tem um nó pai que o precede na hierarquia<br>
+                        • Uma árvore binária pode ser vazia ou composta pelo nó raiz + as subárvores esquerdas e
+                        subárvores
+                        direitas, que também são árvores binárias<br>
+            </p>
+            </div>
+            </div>
+
+            <div class="code-examples">
+                <div class="code-block">
+                    <h3>Estrutura de Árvore Binária</h3>
+                    <div class="image-container">
+                        <img src="https://pythonhelp.wordpress.com/wp-content/uploads/2015/01/image10.png"
+                            alt="Estrutura de Árvore Binária" class="tree-image">
+                    </div>
+                    Na imagem acima, o nó “1” é a raiz da árvore. A subárvore esquerda é composta pelos nós “2”, “4” e
+                    “5” e a subárvore direita é composta pelos nós “3” e “6”. Os nós “2”e “3” são os nós raiz das
+                    subárvores.
+                </div>
+            </div>
+
+            </p>
+
+            <div class="code-examples">
+
+            </div>
+        </section>
+
+        <section id="arvoresbuscabinaria" class="topic">
+            <h2>✨ Árvores Binárias de Busca</h2>
+            <p>As Árvores Binárias de Busca são árvores onde todos os nós pertencentes à subárvore esquerda (de qualquer
+                nó) possuem chave <b>menor que a chave do mesmo</b>, e em que os nós da subárvore direita possuem chave
+                <b>maior que a chave do mesmo</b>. Essa propriedade deve ser válida para todas as subárvores,
+                possibilitando a realização de buscas mais eficientes.
+                <br>
+                <div class="split-content">
+                    <div class="content-left">
+                        <h3 class="content-title">Características Principais:</h3>
+                        • A escolha da direção de busca só depende da chave que se procura e da chave que o nó atual
+                        possui
+                        (se a chave procurada for menor do que a chave do nó atual, vá para a esquerda; se for maior, vá
+                        para a direita).<br>
+                        • Permite busca, inserção e exclusão eficientes<br>
+                        • Não é necessariamente balanceada<br>
+                        • No pior caso (árvore degenerada), o desempenho é O(n)<br>
+                        • No melhor caso (balanceada), o desempenho é O(log n)<br>
+                    </div>
+                </div>
+            </p>
+
+            <div class="code-examples">
+                <div class="code-block">
+                    <h3>Exemplo em Python</h3>
+                    <pre><code>
+# Exemplo de uso
+# Criando uma árvore simples
+raiz = No(10)
+raiz.esquerda = No(5)
+raiz.direita = No(15)
+
+
+                        class No:
+    def __init__(self, chave):
+        self.chave = chave
+        self.esquerda = None
+        self.direita = None
+
+def buscar(raiz, chave):
+    if raiz is None or raiz.chave == chave:
+        return raiz  # Encontrou ou chegou ao fim sem encontrar
+    if chave < raiz.chave:
+        return buscar(raiz.esquerda, chave)
+    else:
+        return buscar(raiz.direita, chave)
+
+# Buscando uma chave
+resultado = buscar(raiz, 15)
+if resultado:
+    print(f"Chave {resultado.chave} encontrada!")
+else:
+    print("Chave não encontrada.")
+                    </code></pre>
+                </div>
+
+                <div class="split-content">
+                    <div class="content-left">
+                        • O algoritmo de busca compara a chave procurada com a raiz:<br>
+                        - Se for igual, a busca termina.<br>
+                        - Se for menor, executa o algoritmo de busca recursivamente na subárvore esquerda.<br>
+                        - Se for maior, executa o algoritmo de busca recursivamente busca na subárvore direita.<br>
+
+                        • O algoritmo de busca é utilizado também nas operações de inserção e remoção nas árvores
+                        binárias de busca, exigindo:<br>
+                        • Um indicador booleano para saber se a chave foi encontrada.<br>
+                        • Uma referência ao pai do nó onde a chave está (ou estaria).<br>
+                        • Se a chave buscada não está armazenada na árvore, o algoritmo retorna o nó onde a busca
+                        falhou, ou seja, aquele nó cuja subárvoreque deveria ser explorada no próximo passo da busca é
+                        vazio.<br>
+                    </div>
+                    <br>
+                    <div class="content-left">
+                        Na busca, existem algumas situações especiais:<br><br>
+                        1. Quando a chave buscada está na raiz, o nó que contém a chave náo tem pai, por isso, o
+                        algoritmo de busca deverá retornar NULO na referência para o pai<br>
+                        <br>
+                        2. Quando a busca é realizada numa árvore vazia, o algoritmo deverá retornar NULO para o nó que
+                        contém a chave, NULO para referência do nó que é pai do nó que contém a chave buscada e o
+                        booleano FALSO.
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="percursoarvores" class="topic">
+            <h2>✨ Percurso em Árvores</h2>
+            <p>Um percurso é a visita sistemática aos elementos de uma estrutura de dados.
+                Existem diferentes formas de percorrer uma árvore, cada uma com aplicações específicas.
+                <br>
+                Obs.: Visitar significa realizar uma operação e não acessar o conteúdo armazenado no elemento da
+                estrutura de dados. Ou seja, especificamente para árvores, acessar um nó da árvore não configura uma
+                visita.
+                <br>
+                <div class="split-content">
+                    <div class="content-left">
+                        <h3 class="content-title">Características Principais:</h3>
+                        - Permite acessar todos os nós da árvore sistematicamente<br>
+                        - Diferentes ordens de percurso resultam em diferentes sequências<br>
+                        - Fundamental para processamento de dados em árvores<br>
+                        - Pode ser recursivo ou iterativo<br>
+                        - Complexidade: O(n) onde n é o número de nós
+                    </div>
+                </div>
+                </div>
+            </p>
+
+            <h3>🌳 Percurso em Pré-ordem (Raiz, Esquerda, Direita)</h3><br>
+            <p><b>Etapa 1</b>: Visita-se a raiz.<br>
+
+                <b>Etapa 2</b>: Percorre-se a subárvore esquerda de *T*, em pré-ordem.<br>
+
+                <b>Etapa 3</b>: Percorre-se a subárvore direita de *T*, em pré-ordem.<br>
+
+                - Para realizar o percurso em pré-ordem, são necessários três acessos ao nó.<br>
+
+                - Se temos *n* nós em uma árvore, o número de acesso ao nó é 3*n*. Assim, a complexidade computacional
+                do
+                percurso em pré-ordem é *O(n)*.</p>
+            <div class="code-examples">
+                <div class="code-block">
+                    <h3>Exemplo em Python</h3>
+                    <pre><code>
+def preordem(raiz):
+    if raiz is not None:
+        print(raiz.valor, end=" ")     # Raiz
+        preordem(raiz.esquerdo)        # Esquerda
+        preordem(raiz.direito)         # Direita
+                    </code></pre>
+                </div>
+            </div>
+
+            <h3><br>🌳 Percurso em Ordem (Esquerda, Raiz, Direita)</h3><br>
+            <p><b>Etapa 1</b>: Percorre-se a subárvore esquerda de T, em ordem simétrica.<br>
+
+                <b> Etapa 2</b>: Visita-se a raiz.<br>
+
+                <b>Etapa 3</b>: Percorre-se as subárvores direita de T, em ordem simétrica.<br>
+
+                - A análise de complexidade é análoga a feita no algoritmo do percurso em pré-ordem, e a única diferença
+                é a ordem das visitas.<br></b>
+
+                - Sendo assim, a complexidade computacional do algoritmo para percurso em ordem simétrica é *O(n)*.</p>
+            <div class="code-examples">
+                <div class="code-block">
+                    <h3>Exemplo em Python</h3>
+                    <pre><code>
+def emOrdem(raiz):
+    if raiz is not None:
+        emOrdem(raiz.esquerdo)         # Esquerda
+        print(raiz.valor, end=" ")     # Raiz
+        emOrdem(raiz.direito)          # Direita
+                    </code></pre>
+                </div>
+            </div>
+
+            <h3><br>🌳 Percurso em Pós-ordem (Esquerda, Direita, Raiz)</h3><br>
+            <p>
+
+                <b>Etapa 1</b>: Percorre-se a subárvore esquerda de *T*, em pós-ordem.<br>
+
+                <b>Etapa 2</b>: Percorre-se a subárvore direita de *T*, em pós-ordem.<br>
+
+                <b>Etapa 3</b>: Visita-se a raiz.<br>
+
+                - A análise da complexidade é totalmente análoga à análise feita para pré-ordem e a ordem simétrica, o
+                que faz com que o algoritmo tenha complexidade O(n).</p>
+            <div class="code-examples">
+                <div class="code-block">
+                    <h3>Exemplo em Python</h3>
+                    <pre><code>
+def posOrdem(raiz):
+    if raiz is not None:
+        posOrdem(raiz.esquerdo)        # Esquerda
+        posOrdem(raiz.direito)         # Direita
+        print(raiz.valor, end=" ")     # Raiz
+                    </code></pre>
+                </div>
+            </div>
+            <div class="image-container">
+                <img src="https://pythonhelp.wordpress.com/wp-content/uploads/2015/01/image12.png"
+                    alt="Estrutura de Árvore Binária" class="tree-image">
+            </div>
+        </section>
+
+        <section id="operacoes" class="topic">
+            <h2>✨ Operações em Árvores</h2>
+            <p>Operações em árvores são os procedimentos fundamentais de conjuntos dinâmicos para manipular dados
+                armazenados em estruturas de árvore. As operações principais são seleção, inserção, remoção e a própria
+                busca.<br>
+                <div class="split-content">
+                    <div class="content-left">
+                        <h3 class="content-title">Características Principais:</h3>
+                        • As operações levam um tempo proporcional à altura da árvore.<br>
+                        • Para uma árvore completa de n nós, tais operações levam um tempo proporcional a O(log n).<br>
+                        • Se a árvore for uma lista de nós (ou seja, degenerada ou árvore zig-zag), as operações podem
+                        levar
+                        O(n).<br>
+            </p>
+            </div>
+            </div>
+
+            <br>
+
+            <h3>🌳 Inserção</h3><Br>
+            <p>- A inserção ocorre sempre em um novo nó folha, respeitando a regra: menores à esquerda, maiores à
+                direita.<br>
+                - Antes de inserir, é feita uma busca pela chave:<br>
+                - Se a chave já existe, não é inserida.<br>
+                - Se não existe, a busca retorna o nó pai onde o novo nó será ligado.<br>
+                - Caso especial: se a árvore estiver vazia, o novo nó vira a raiz.<br>
+                - A inserção percorre a árvore como na busca, parando ao encontrar um nó folha sem o filho
+                correspondente.<br>
+                - A nova chave é inserida como filho à esquerda se for menor, ou à direita se for maior.<br><br>
+                📊 <b>Complexidade:</b><br><br>
+                - A inserção depende da busca, que tem complexidade O(n) no pior caso (árvore desbalanceada).<br>
+                - A operação de inserir o nó após a busca é feita em tempo constante O(1).
+            </p>
+            <div class="code-examples">
+                <div class="code-block">
+                    <h3>Exemplo em Python</h3>
+                    <pre><code>
+def inserir(raiz, valor):
+    if raiz is None:
+        return Node(valor)
+    
+    if valor < raiz.valor:
+        raiz.esquerdo = inserir(raiz.esquerdo, valor)
+    elif valor > raiz.valor:
+        raiz.direito = inserir(raiz.direito, valor)
+    
+    return raiz
+
+# Complexidade: O(log n) em média, O(n) no pior caso
+                    </code></pre>
+                </div>
+            </div>
+            <br><br>
+            <h3>🌳 Remoção</h3><br>
+            <p>A remoção é mais complexa que a inserção. Há três casos: remover folha (simples), remover com um filho
+                (simples) e remover com dois filhos (requer reestruturação).
+
+
+                A remoção de um nó pode ocorrer em três casos distintos:<br><br>
+                - <b>Nó folha (sem filhos):</b><br><br>
+                - Basta desconectar o nó do seu pai.<br>
+                - Exemplo: remover o nó 4 → left do nó 6 aponta para None.<br>
+                <br>
+                - <b>Nó com um filho:</b><br><br>
+                - O pai do nó passa a apontar diretamente para o único filho do nó removido.<br>
+                - Exemplo: remover o nó 10 → nó 8 aponta para o nó 14.<br>
+                <br>
+                - <b>Nó com dois filhos:</b><br><br>
+                - Substituímos o nó pelo menor valor da subárvore direita (o sucessor).<br>
+                - Exemplo: remover o nó 3 → substituído pelo nó 4 (mais à esquerda da subárvore direita).<br>
+                <br>
+                📊 <b>Complexidade:</b><br><br>
+                Em todos os casos, a operação de remoção depende da busca, que tem custo O(n) no pior caso (árvore
+                desbalanceada). As demais operações são simples.
+            </p>
+            <div class="code-examples">
+                <div class="code-block">
+                    <h3>Exemplo em Python</h3>
+                    <pre><code>
+def remover(raiz, valor):
+    if raiz is None:
+        return None
+    
+    if valor < raiz.valor:
+        raiz.esquerdo = remover(raiz.esquerdo, valor)
+    elif valor > raiz.valor:
+        raiz.direito = remover(raiz.direito, valor)
+    else:
+        # Caso 1: Folha (sem filhos)
+        if raiz.esquerdo is None and raiz.direito is None:
+            return None
+        # Caso 2: Um filho
+        if raiz.esquerdo is None:
+            return raiz.direito
+        if raiz.direito is None:
+            return raiz.esquerdo
+        # Caso 3: Dois filhos
+        # encontrar sucessor e fazer rearranjo
+    
+    return raiz
+
+# Complexidade: O(log n) em média, O(n) no pior caso
+                    </code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="arvoreavl" class="topic">
+            <h2>✨ Árvore AVL</h2>
+            <p></p>
+            <div class="split-content">
+                <div class="content-left">
+                    <h3 class="content-title">Características Principais:</h3>
+                    • Uma árvore binária de busca é uma AVL quando, para qualquer um de seus nós, a diferença entre as
+                    alturas de suas subárvores direita e esquerda é no máximo 1 (ou seja, deve ser equilibrada -
+                    BALANCEADA)<br>
+                    • É uma estrutura de dados completamente dinâmica que suporte inserções, remoções e buscas em O(log
+                    n).<br>
+                    • A altura mínima de uma árvore AVL é proporcional O(l*og n)*. Ou seja, suas operações levam tempo
+                    O(log n).<Br>
+                    • As árvores completas são AVL.<br>
+                    • Caso a árvore esteja desbalanceada, podemos balanceá-la através de rotações.
+                </div>
+            </div>
+
+            <h3>🌳 Busca, Inserção e Remoção em Árvore AVL</h3>
+            <p>A inserção e remoção em AVL são similares à busca em árvore binária, mas após cada operação, o algoritmo
+                verifica o fator de balanceamento e realiza rotações se necessário para manter a árvore
+                balanceada.<br><br>
+
+                <b>➖ Busca em AVL:</b><Br><br>
+
+                - Árvores AVL são árvores binárias de busca, ou seja, segume o mesmo algoritmo da árvore binária de busca.<br>
+                - Complexidade: nas árvores AVL, as piores árvores são as árvores de Fibonacci que têm altura proporcional a log n, sendo assim, a complexidade do algoritmo da busca, quando aplicado em árvores AVL, é O(log n). <br><br>
+
+                <b>➖ Inserção em AVL:</b><Br><br>
+                - A inserção em árvore AVL segue o mesmo algoritmo da árvore binária de busca.<br>
+                - Se a árvore se desbalancear com a inserção, é corrigida com rotações simples, que têm custo O(1).
+                - Por conta do balanceamento evita a formação de árvores "zig-zag" (desbalanceadas).<br>
+                - Mesmo no pior caso, são necessárias no máximo O(log n) rotações.<br><br>
+
+                <b>➖ Remoção em AVL:</b><Br><br>
+
+                - A remoção também pode exigir rebalanceamento por rotações até a raiz.<br>
+                - Cada rotação é simples (O(1)), e no máximo O(log n) rotações são feitas.<br>
+                - O pior caso da remoção é a remoção da folha menos profunda de uma árvore de Fibonacci. Neste caso, realizamos todas as rotações da folha removida até a raiz.<br>
+
+            </p>
+            <div class="code-examples">
+                <div class="code-block">
+                    <h3>Exemplo em Python (Inserção)</h3>
+                    <pre><code>
+class AVLNode:
+    def __init__(self, valor):
+        self.valor = valor
+        self.altura = 1
+        self.esquerdo = None
+        self.direito = None
+
+def inserir_avl(raiz, valor):
+    if raiz is None:
+        return AVLNode(valor)
+    
+    if valor < raiz.valor:
+        raiz.esquerdo = inserir_avl(raiz.esquerdo, valor)
+    elif valor > raiz.valor:
+        raiz.direito = inserir_avl(raiz.direito, valor)
+    else:
+        return raiz
+    
+    # Atualizar altura
+    raiz.altura = 1 + max(obter_altura(raiz.esquerdo),
+                          obter_altura(raiz.direito))
+    
+    # Calcular fator de balanceamento
+    fator = obter_fator(raiz)
+    
+    # Rotações necessárias...
+    # Esquerda-Esquerda, Direita-Direita, etc.
+    
+    return raiz
+
+# Complexidade: O(log n) garantido
+                    </code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="balanceamento" class="topic">
+            <h2>✨ Balanceamento de Árvores Binárias</h2>
+            <p>O balanceamento de árvores binárias é uma técnica fundamental para manter a eficiência das operações. Uma árvore desbalanceada pode degenerar em uma lista ligada, degradando o desempenho para O(n). Diferentes estratégias de balanceamento garantem que a altura permaneça logarítmica.
+                <br>
+            <div class="split-content">
+                <div class="content-left">
+                    <h3 class="content-title">Características Principais:</h3><br>
+                    - Uma árvore balanceada mantém a diferença de altura entre subárvores mínima<br>
+                    - Rotações (esquerda e direita) são usadas para rebalancear<br>
+                    - Fator de balanceamento: altura(esquerda) - altura(direita)<br>
+                    - Garante complexidade O(log n) para busca, inserção e remoção<br>
+                    - Exemplos: AVL, Red-Black, B-trees<br>
+                </div>
+            </div><br>
+            </p>
+
+            <h3>🌳 Rotações em Árvores</h3>
+            <p>As rotações são operações fundamentais usadas para rebalancear árvores. Existem dois tipos principais: rotações simples (esquerda ou direita) e rotações duplas (esquerda-direita ou direita-esquerda).</p>
+            
+            <div class="code-examples">
+                <div class="code-block">
+                    <h3>Rotação Simples (Python)</h3><br>
+                    <pre><code>
+def rotacao_direita(no):
+    """Rotação simples para direita"""
+    novo_raiz = no.esquerdo
+    no.esquerdo = novo_raiz.direito
+    novo_raiz.direito = no
+    
+    # Atualizar alturas
+    no.altura = 1 + max(obter_altura(no.esquerdo), obter_altura(no.direito))
+    novo_raiz.altura = 1 + max(obter_altura(novo_raiz.esquerdo), obter_altura(novo_raiz.direito))
+    
+    return novo_raiz
+
+def rotacao_esquerda(no):
+    """Rotação simples para esquerda"""
+    novo_raiz = no.direito
+    no.direito = novo_raiz.esquerdo
+    novo_raiz.esquerdo = no
+    
+    # Atualizar alturas
+    no.altura = 1 + max(obter_altura(no.esquerdo), obter_altura(no.direito))
+    novo_raiz.altura = 1 + max(obter_altura(novo_raiz.esquerdo), obter_altura(novo_raiz.direito))
+    
+    return novo_raiz
+                    </code></pre>
+                </div>
+            </div><Br>
+
+            <h3>🌳 Rotações Duplas</h3><br>
+            <p>Rotações duplas são necessárias quando um desbalanceamento é causado por um nó na direção oposta. Combinam duas rotações simples em sequência.</p>
+            
+            <div class="code-examples">
+                <div class="code-block">
+                    <h3>Rotação Dupla (Python)</h3>
+                    <pre><code>
+def rotacao_esquerda_direita(no):
+    """Rotação dupla: esquerda depois direita"""
+    no.esquerdo = rotacao_esquerda(no.esquerdo)
+    return rotacao_direita(no)
+
+def rotacao_direita_esquerda(no):
+    """Rotação dupla: direita depois esquerda"""
+    no.direito = rotacao_direita(no.direito)
+    return rotacao_esquerda(no)
+
+# Exemplo de uso em inserção com balanceamento
+def inserir_balanceado(raiz, valor):
+    if raiz is None:
+        return Node(valor)
+    
+    if valor < raiz.valor:
+        raiz.esquerdo = inserir_balanceado(raiz.esquerdo, valor)
+    else:
+        raiz.direito = inserir_balanceado(raiz.direito, valor)
+    
+    # Calcular fator de balanceamento
+    fator = obter_altura(raiz.esquerdo) - obter_altura(raiz.direito)
+    
+    # Caso esquerda-esquerda
+    if fator > 1 and obter_fator(raiz.esquerdo) >= 0:
+        return rotacao_direita(raiz)
+    
+    # Caso direita-direita
+    if fator < -1 and obter_fator(raiz.direito) <= 0:
+        return rotacao_esquerda(raiz)
+    
+    # Caso esquerda-direita
+    if fator > 1 and obter_fator(raiz.esquerdo) < 0:
+        return rotacao_esquerda_direita(raiz)
+    
+    # Caso direita-esquerda
+    if fator < -1 and obter_fator(raiz.direito) > 0:
+        return rotacao_direita_esquerda(raiz)
+    
+    return raiz
+                    </code></pre>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>🌸 Luana Santini: Sistemas de Informação - Estácio Florianópolis - Matrícula 202308416251🌸</p>
+    </footer>
+</body>
+
+</html>

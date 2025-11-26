@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
@@ -13,598 +13,536 @@
 
 <body>
     <header>
-        <h1>Arvóres binárias </h1>
+        <h1>Grafos</h1>
         <p class="subtitle">Algoritmos e complexidade</p>
     </header>
 
     <nav>
         <ul>
-            <li><a href="#arvores">Árvores</a></li>
-            <li><a href="#arvoresbinarias">Árvores Binárias</a></li>
-            <li><a href="#arvoresbuscabinaria">Árvores Binárias de Busca</a></li>
-            <li><a href="#percursoarvores">Percurso em Árvores</a></li>
-            <li><a href="#operacoes">Operações</a></li>
-            <li><a href="#arvoreavl">Árvore AVL</a></li>
-            <li><a href="#balanceamento">Balanceamento</a></li>
+            <li><a href="#conceitos">Conceitos</a></li>
+            <li><a href="#tipos">Tipos de Grafos</a></li>
+            <li><a href="#representacao">Representação</a></li>
+            <li><a href="#buscas">Buscas</a></li>
+            <li><a href="#algoritmos">Algoritmos</a></li>
+            <li><a href="#caminhos">Caminhos Mínimos</a></li>
+            <li><a href="#aplicacoes">Aplicações</a></li>
         </ul>
     </nav>
 
     <main>
 
-        <section id="arvores" class="topic">
-            <h2>✨ Árvores</h2>
-            <p>Arvores são estruturas de dados hierárquicas nas quais os dados são armazenados por nós conectados por
-                arestas, representando relações pai-filho. Elas são amplamente utilizadas em ciência da computação para
-                organizar dados de forma eficiente, permitindo operações rápidas de busca, inserção e remoção.
+        <section id="conceitos" class="topic">
+            <h2> Conceitos Fundamentais</h2>
+            <p>Um grafo é uma estrutura de dados abstrata composta por um conjunto de vértices (também chamados de nós)
+                e um conjunto de arestas que conectam pares de vértices. Os grafos são usados para modelar
+                relacionamentos entre objetos e são fundamentais em ciência da computação.
                 <br>
                 <div class="split-content">
                     <div class="content-left">
                         <h3 class="content-title">Características Principais:</h3>
-                        • O primeiro nó é chamado de nó raiz. Este nó não tem um nó pai e serve como o ponto de origem
-                        para
-                        todos os outros nós da árvore<br>
-                        • Os nós folha, ou terminais, são os nós que não têm filhos. Eles representam as extremidades
-                        dos
-                        ramos da árvore, constituindo o final de um caminho específico.<br>
-                        • Nós que têm pelo menos um filho são chamados de nós internos. Estes constituem os pontos de
-                        bifurcação na árvore, representando decisões ou ramificações na estrutura.<br>
-                        • A forma mais comum de representar uma árvore em memória é utilizando alocação dinâmica,
-                        utilizando
-                        uma referência para sua raiz que guarda a chave (dado) e uma referência para a raiz das
-                        subárvores
-                        esquerda e direita.<br>
-                        • Árvores são estruturas de dados muito versáteis e a abstração mais utilizada para representar
-                        o nó
-                        de uma árvore é o agregado heterogêneo, comumente chamado de <b>registro (record)</b> ou
-                        <b>estrutura (struct)</b> nas linguagens de programação. O agregado heterogêneo é capaz de
-                        armazenar
-                        objetos de dados de tipos diferentes acessando-os através do mesmo identificador e
-                        distinguindo-os
-                        através de um seletor.<br>
+                        • <b>Vértices (Nós):</b> Elementos fundamentais do grafo que representam objetos ou entidades.<br>
+                        • <b>Arestas:</b> Conexões entre pares de vértices que representam relacionamentos.<br>
+                        • <b>Grau de um vértice:</b> Número de arestas incidentes ao vértice. Em grafos direcionados,
+                        distinguem-se grau de entrada (in-degree) e grau de saída (out-degree).<br>
+                        • <b>Caminho:</b> Sequência de vértices conectados por arestas.<br>
+                        • <b>Ciclo:</b> Caminho que começa e termina no mesmo vértice.<br>
+                        • <b>Componente Conexa:</b> Subconjunto de vértices onde existe caminho entre qualquer par.<br>
+                        • <b>Peso:</b> Valor associado a uma aresta (em grafos ponderados).<br>
                         <div class="image-container">
-                            <img src="https://lh7-us.googleusercontent.com/jECv80Ugul9kfFG0vTF6qGin4EwN3_fkIGnOf_ah0b-1gmLl9hifVlwTE5RE4fwUhluWIgfL2HHq5HxSXVFGd06SVxzTD0cCyK0bbZeSmLB6pRXxDjdq7kkhWLZcnHTBZiaIGgPakg1l3nfFp_wQk3O4OAa9f1hRaq6vRjILH4AF6ULhB_yNM4CjngdVag"
-                                alt="Estrutura de Árvore Binária" class="tree-image">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/6n-graf.svg/1024px-6n-graf.svg.png"
+                                alt="Exemplo de Grafo" class="tree-image">
                         </div>
-                        <center>A altura de uma árvore é a profundidade máxima de um nó da árvore.</center><br>
+                        <center>Exemplo de um grafo simples com 6 vértices e 7 arestas</center><br>
 
 
                     </div>
                 </div>
             </p>
 
-            <div class="code-examples">
-                <div class="code-block">
-                    <h3>Estrutura de Árvore</h3>
-                    <div class="image-container">
-                        <img src="https://pythonhelp.wordpress.com/wp-content/uploads/2015/01/image06.png"
-                            alt="Estrutura de Árvore Binária" class="tree-image">
-                    </div>
-                    Na figura acima, o nó raiz é o 8, e ele tem como filhos os nós de chave 4, 2, 9 e 1. O nó 4 é pai
-                    dos nós 6 e 7. Estes dois, assim como os nós de chave 5, 2 e 1, são chamados de folhas por não terem
-                    filhos (ou seja, seus filhos são nulos).
-                    <div class="image-container">
-                        <img src="https://lh7-us.googleusercontent.com/WOjfHPnu_65FACqq3x14bMcGMaVGba0MlQ2-ZSRB5VVdZ9TO98HJbkVy998cF2dk_ZFQhyuK9U-5ZQNOEgxSVNwyP4YAgkLzGyWxCAI2zYAa3n4KRJrbfkRzf1hRLc3MAI3fIo5JXG9W9T9sIe-YT7Ljie9bhZyaE5v9zwAHeHcp_xfUsLkUeWMvL3inMA"
-                            alt="Estrutura de Árvore Binária" class="tree-image">
-                    </div>
-                </div>
-            </div>
+
         </section>
 
-        <section id="arvoresbinarias" class="topic">
-            <h2>✨ Árvores Binárias</h2>
-            <p>Uma árvore binária é um tipo especial de árvore onde cada nó tem no máximo dois filhos: um filho esquerdo
-                e um filho direito. É uma das estruturas de dados mais fundamentais em computação.
-                <br>
-                <div class="image-container">
-                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg9Ho7ZYW5fMMsQsrrZgzXh5eCv6r-mdgv5hEgps0akglNfNAISeJe67z4_7mQAWAFsHn39fyN0U8spTspM4KvHKHUaiuLLSavJ3CY3uQErm9cG3pMOwA_daw8X92xWG85sPmzttvbYgw/s1600/tiposDeArvoreBinaria.png"
-                        alt="Estrutura de Árvore Binária" class="tree-image">
-                </div>
-                <div class="split-content">
-                    <div class="content-left">
-                        <h3 class="content-title">Características Principais:</h3>
-                        • O filho à esquerda e o filho à direita são distintos, permitindo que a árvore cresça de
-                        maneira
-                        organizada<br>
-                        • Cada nó, exceto o nó raiz, tem um nó pai que o precede na hierarquia<br>
-                        • Uma árvore binária pode ser vazia ou composta pelo nó raiz + as subárvores esquerdas e
-                        subárvores
-                        direitas, que também são árvores binárias<br>
-            </p>
-            </div>
-            </div>
-
-            <div class="code-examples">
-                <div class="code-block">
-                    <h3>Estrutura de Árvore Binária</h3>
-                    <div class="image-container">
-                        <img src="https://pythonhelp.wordpress.com/wp-content/uploads/2015/01/image10.png"
-                            alt="Estrutura de Árvore Binária" class="tree-image">
-                    </div>
-                    Na imagem acima, o nó “1” é a raiz da árvore. A subárvore esquerda é composta pelos nós “2”, “4” e
-                    “5” e a subárvore direita é composta pelos nós “3” e “6”. Os nós “2”e “3” são os nós raiz das
-                    subárvores.
-                </div>
-            </div>
-
-            </p>
-
-            <div class="code-examples">
-
-            </div>
-        </section>
-
-        <section id="arvoresbuscabinaria" class="topic">
-            <h2>✨ Árvores Binárias de Busca</h2>
-            <p>As Árvores Binárias de Busca são árvores onde todos os nós pertencentes à subárvore esquerda (de qualquer
-                nó) possuem chave <b>menor que a chave do mesmo</b>, e em que os nós da subárvore direita possuem chave
-                <b>maior que a chave do mesmo</b>. Essa propriedade deve ser válida para todas as subárvores,
-                possibilitando a realização de buscas mais eficientes.
+        <section id="tipos" class="topic">
+            <h2> Tipos de Grafos</h2>
+            <p>Existem vários tipos de grafos, cada um com características e aplicações específicas. A classificação
+                depende de propriedades como direção, peso e estrutura das arestas.
                 <br>
                 <div class="split-content">
                     <div class="content-left">
-                        <h3 class="content-title">Características Principais:</h3>
-                        • A escolha da direção de busca só depende da chave que se procura e da chave que o nó atual
-                        possui
-                        (se a chave procurada for menor do que a chave do nó atual, vá para a esquerda; se for maior, vá
-                        para a direita).<br>
-                        • Permite busca, inserção e exclusão eficientes<br>
-                        • Não é necessariamente balanceada<br>
-                        • No pior caso (árvore degenerada), o desempenho é O(n)<br>
-                        • No melhor caso (balanceada), o desempenho é O(log n)<br>
+                        <h3 class="content-title">Tipos de grafos</h3>
+                        • <b>Grafo Direcionado (Dígrafo):</b> As arestas têm um sentido único e vão de um vértice para
+                        outro.<br>
+                        • <b>Grafo Não-Direcionado:</b> As arestas não têm direção, são bidirecionais e conectam vértices
+                        de forma
+                        simétrica.<br>
+                        • <b>Grafo Ponderado:</b> Cada aresta possui valores associados a elas. Esses valores são chamados
+                        de pesos, custos ou distância.<BR>
+                        • <b>Grafo Não-Ponderado:</b> As arestas não possuem valores associados a elas<br>
+                        • <b>Grafo Completo:</b> Existe uma aresta entre todo par de vértices.<br>
+                        • <b>Grafo Cíclico:</b> Contém pelo menos um ciclo.<br>
+                        • <b>Grafo Acíclico (DAG):</b> Não contém ciclos.<br>
                     </div>
                 </div>
+
+                <div class="code-examples">
+                    <div class="code-block">
+                        <h3>Grafos direcionados e não direcionados</h3>
+                        <div class="image-container">
+                            <img src="https://media.licdn.com/dms/image/v2/C4E12AQHfTMIkrjYPNQ/article-inline_image-shrink_400_744/article-inline_image-shrink_400_744/0/1625159712100?e=2147483647&v=beta&t=0fguq6qYhPupS8XG3nHShuOMKSt7N4oNMPf7_UY6fFA"
+                                alt="Direção de grafos" class="tree-image">
+                        </div>
+                        <div class="content-left">
+                            Na figura acima, na direita temos um grafo direcionado com vértices {A, B, C, D, E} e
+                            arestas
+                            representadas pelas setas. Cada aresta aponta de um vértice para outro, indicando uma
+                            relação
+                            direcionada. Por exemplo, a aresta de A para B indica uma conexão que vai de A para B.
+                            Já na esquerda, temos um grafo não-direcionado com os mesmos vértices, mas as arestas são
+                            representadas por linhas sem setas, indicando que a conexão entre os vértices é
+                            bidirecional.
+                            Por exemplo, a linha entre A e B indica que há uma conexão entre A e B que pode ser
+                            percorrida
+                            em ambos os sentidos.
+                        </div>
+                    </div>
+
+                    <div class="code-block">
+                        <h3>Grafos ponderados</h3>
+                        <div class="image-container">
+                            <img src="https://d33wubrfki0l68.cloudfront.net/e7598847793e60d1f80b49506ddb5b0b64f2b5be/3e048/wp-content/uploads/2006/01/grviz04113_001.png"
+                                alt="Grafos ponderados" class="tree-image">
+                        </div>
+                        <div class="content-left">
+                            Em um grafo ponderado, ao ir de um vértice a outro, procuramos o caminho onde a soma dos
+                            valores
+                            das arestas seja a menor possível, independente do número de arestas percorridas ou da
+                            distância entre elas.
+                            Neste grafo, por exemplo, o menor caminho de 0 a 3 não é a aresta 0–3, mas sim a aresta 0–2
+                            e depois a aresta 2–3.
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <div class="code-examples">
+                    <div class="code-block">
+                        <h3>Grafos completos</h3>
+                        <div class="image-container">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Grafo_completo.jpg"
+                                alt="Grafos completos" class="tree-image">
+                        </div>
+                        <div class="content-left">
+                            Um grafo completo é um grafo em que <b>todos os pares de vértices</b> distintos são
+                            conectados por uma aresta. Isso significa que cada vértice tem uma aresta conectando-o a
+                            todos os outros vértices do grafo. Um grafo completo com <i>n</i> vértices é denotado por
+                            <i>Kn</i>.
+                        </div>
+                    </div>
+
+                    <div class="code-block">
+                        <h3>Grafos cíclicos</h3>
+                        <div class="image-container">
+                            <img src="https://www.luisllamas.es/images/20297/grafo-ciclo.webp" alt="Grafos cíclicos"
+                                class="tree-image">
+                        </div>
+                        <div class="content-left">
+                            Um grafo cíclico é um grafo que contém um ou mais caminhos que começam e terminam no mesmo
+                            vértice, sem repetir outros vértices no processo, chamados de ciclos. Em outras palavras, em
+                            alguma parte do grafo é possível percorrer uma sequência de arestas e retornar ao ponto de
+                            partida, formando um ciclo fechado. Grafos acíclicos não possuem nenhum ciclo.
+                        </div>
+
+
+                    </div>
+
+                </div><br>
+
+
+
             </p>
 
             <div class="code-examples">
                 <div class="code-block">
-                    <h3>Exemplo em Python</h3>
+                    <h3>Exemplo em Python - Classe Grafo</h3>
                     <pre><code>
+class Grafo:
+    def __init__(self, num_vertices):
+        self.num_vertices = num_vertices
+        self.lista_adjacencia = [[] for _ in range(num_vertices)]
+    
+    def adicionar_aresta(self, u, v, peso=1):
+        """Adiciona uma aresta entre u e v"""
+        self.lista_adjacencia[u].append((v, peso))
+        # Para grafo não-direcionado, descomente:
+        # self.lista_adjacencia[v].append((u, peso))
+
+    def obter_vizinhos(self, vertice):
+        """Retorna os vizinhos de um vértice"""
+        return self.lista_adjacencia[vertice]
+
 # Exemplo de uso
-# Criando uma árvore simples
-raiz = No(10)
-raiz.esquerda = No(5)
-raiz.direita = No(15)
-
-
-                        class No:
-    def __init__(self, chave):
-        self.chave = chave
-        self.esquerda = None
-        self.direita = None
-
-def buscar(raiz, chave):
-    if raiz is None or raiz.chave == chave:
-        return raiz  # Encontrou ou chegou ao fim sem encontrar
-    if chave < raiz.chave:
-        return buscar(raiz.esquerda, chave)
-    else:
-        return buscar(raiz.direita, chave)
-
-# Buscando uma chave
-resultado = buscar(raiz, 15)
-if resultado:
-    print(f"Chave {resultado.chave} encontrada!")
-else:
-    print("Chave não encontrada.")
+grafo = Grafo(5)
+grafo.adicionar_aresta(0, 1, 4)
+grafo.adicionar_aresta(0, 2, 2)
+grafo.adicionar_aresta(1, 2, 1)
+grafo.adicionar_aresta(1, 3, 5)
                     </code></pre>
                 </div>
 
-                <div class="split-content">
-                    <div class="content-left">
-                        • O algoritmo de busca compara a chave procurada com a raiz:<br>
-                        - Se for igual, a busca termina.<br>
-                        - Se for menor, executa o algoritmo de busca recursivamente na subárvore esquerda.<br>
-                        - Se for maior, executa o algoritmo de busca recursivamente busca na subárvore direita.<br>
-
-                        • O algoritmo de busca é utilizado também nas operações de inserção e remoção nas árvores
-                        binárias de busca, exigindo:<br>
-                        • Um indicador booleano para saber se a chave foi encontrada.<br>
-                        • Uma referência ao pai do nó onde a chave está (ou estaria).<br>
-                        • Se a chave buscada não está armazenada na árvore, o algoritmo retorna o nó onde a busca
-                        falhou, ou seja, aquele nó cuja subárvoreque deveria ser explorada no próximo passo da busca é
-                        vazio.<br>
-                    </div>
-                    <br>
-                    <div class="content-left">
-                        Na busca, existem algumas situações especiais:<br><br>
-                        1. Quando a chave buscada está na raiz, o nó que contém a chave náo tem pai, por isso, o
-                        algoritmo de busca deverá retornar NULO na referência para o pai<br>
-                        <br>
-                        2. Quando a busca é realizada numa árvore vazia, o algoritmo deverá retornar NULO para o nó que
-                        contém a chave, NULO para referência do nó que é pai do nó que contém a chave buscada e o
-                        booleano FALSO.
-
-                    </div>
-                </div>
             </div>
 
         </section>
 
-        <section id="percursoarvores" class="topic">
-            <h2>✨ Percurso em Árvores</h2>
-            <p>Um percurso é a visita sistemática aos elementos de uma estrutura de dados.
-                Existem diferentes formas de percorrer uma árvore, cada uma com aplicações específicas.
-                <br>
-                Obs.: Visitar significa realizar uma operação e não acessar o conteúdo armazenado no elemento da
-                estrutura de dados. Ou seja, especificamente para árvores, acessar um nó da árvore não configura uma
-                visita.
+        
+
+        <section id="buscas" class="topic">
+            <h2> Buscas em Grafos</h2>
+            <p>As buscas são operações fundamentais que permitem explorar todos os vértices de um grafo de forma
+                sistemática. As duas principais estratégias são a busca em profundidade (DFS) e a busca em largura
+                (BFS).
                 <br>
                 <div class="split-content">
                     <div class="content-left">
                         <h3 class="content-title">Características Principais:</h3>
-                        - Permite acessar todos os nós da árvore sistematicamente<br>
-                        - Diferentes ordens de percurso resultam em diferentes sequências<br>
-                        - Fundamental para processamento de dados em árvores<br>
-                        - Pode ser recursivo ou iterativo<br>
-                        - Complexidade: O(n) onde n é o número de nós
+                        • Permite acessar todos os vértices do grafo sistematicamente<br>
+                        • Diferentes ordens de exploração resultam em diferentes sequências<br>
+                        • Fundamental para processamento de dados em grafos<br>
+                        • Pode ser implementada de forma recursiva ou iterativa<br>
+                        • Complexidade: O(V + E) onde V é o número de vértices e E o número de arestas
                     </div>
                 </div>
                 </div>
             </p>
 
-            <h3>🌳 Percurso em Pré-ordem (Raiz, Esquerda, Direita)</h3><br>
-            <p><b>Etapa 1</b>: Visita-se a raiz.<br>
+            <h3> Busca em Profundidade (DFS - Depth First Search)</h3><br>
+            <p><b>Característica:</b> Explora o grafo indo o mais profundo possível antes de retroceder.<br>
 
-                <b>Etapa 2</b>: Percorre-se a subárvore esquerda de *T*, em pré-ordem.<br>
+                <b>Algoritmo:</b><br>
+                1. Marca o vértice atual como visitado<br>
+                2. Para cada vizinho não visitado, executa recursivamente DFS<br>
+                3. Depois de explorar todos os vizinhos, retrocede<br>
 
-                <b>Etapa 3</b>: Percorre-se a subárvore direita de *T*, em pré-ordem.<br>
-
-                - Para realizar o percurso em pré-ordem, são necessários três acessos ao nó.<br>
-
-                - Se temos *n* nós em uma árvore, o número de acesso ao nó é 3*n*. Assim, a complexidade computacional
-                do
-                percurso em pré-ordem é *O(n)*.</p>
+                - Utiliza pilha (stack) ou recursão para manter controle da exploração<br>
+                - Pode ser usada para detecção de ciclos, ordenação topológica e componentes fortemente conexas<br>
+                - Complexidade: O(V + E) onde V é o número de vértices e E o número de arestas</p>
             <div class="code-examples">
                 <div class="code-block">
-                    <h3>Exemplo em Python</h3>
+                    <h3>Exemplo em Python - DFS Recursivo</h3>
                     <pre><code>
-def preordem(raiz):
-    if raiz is not None:
-        print(raiz.valor, end=" ")     # Raiz
-        preordem(raiz.esquerdo)        # Esquerda
-        preordem(raiz.direito)         # Direita
+def dfs(grafo, vertice, visitado=None):
+    if visitado is None:
+        visitado = set()
+    
+    visitado.add(vertice)
+    print(vertice, end=" ")  # Processa o vértice
+    
+    for vizinho, _ in grafo.lista_adjacencia[vertice]:
+        if vizinho not in visitado:
+            dfs(grafo, vizinho, visitado)
+
+# Exemplo de uso
+grafo = Grafo(5)
+grafo.adicionar_aresta(0, 1)
+grafo.adicionar_aresta(0, 2)
+grafo.adicionar_aresta(1, 2)
+grafo.adicionar_aresta(2, 0)
+grafo.adicionar_aresta(2, 3)
+
+dfs(grafo, 0)  # Saída: 0 1 2 3
                     </code></pre>
                 </div>
             </div>
 
-            <h3><br>🌳 Percurso em Ordem (Esquerda, Raiz, Direita)</h3><br>
-            <p><b>Etapa 1</b>: Percorre-se a subárvore esquerda de T, em ordem simétrica.<br>
+            <h3><br> Busca em Largura (BFS - Breadth First Search)</h3><br>
+            <p><b>Característica:</b> Explora o grafo visitando todos os vértices no mesmo nível antes de ir para o
+                próximo nível.<br>
 
-                <b> Etapa 2</b>: Visita-se a raiz.<br>
+                <b>Algoritmo:</b><br>
+                1. Marca o vértice inicial como visitado e enfileira<br>
+                2. Enquanto houver vértices na fila:<br>
+                a. Remove o primeiro vértice da fila<br>
+                b. Para cada vizinho não visitado, marca como visitado e enfileira<br>
 
-                <b>Etapa 3</b>: Percorre-se as subárvores direita de T, em ordem simétrica.<br>
-
-                - A análise de complexidade é análoga a feita no algoritmo do percurso em pré-ordem, e a única diferença
-                é a ordem das visitas.<br></b>
-
-                - Sendo assim, a complexidade computacional do algoritmo para percurso em ordem simétrica é *O(n)*.</p>
+                - Utiliza fila (queue) para manter controle da exploração<br>
+                - Encontra o menor caminho em grafos não ponderados<br>
+                - Complexidade: O(V + E) onde V é o número de vértices e E o número de arestas</p>
             <div class="code-examples">
                 <div class="code-block">
-                    <h3>Exemplo em Python</h3>
+                    <h3>Exemplo em Python - BFS</h3>
                     <pre><code>
-def emOrdem(raiz):
-    if raiz is not None:
-        emOrdem(raiz.esquerdo)         # Esquerda
-        print(raiz.valor, end=" ")     # Raiz
-        emOrdem(raiz.direito)          # Direita
+from collections import deque
+
+def bfs(grafo, inicio):
+    visitado = set()
+    fila = deque([inicio])
+    visitado.add(inicio)
+    
+    while fila:
+        vertice = fila.popleft()
+        print(vertice, end=" ")  # Processa o vértice
+        
+        for vizinho, _ in grafo.lista_adjacencia[vertice]:
+            if vizinho not in visitado:
+                visitado.add(vizinho)
+                fila.append(vizinho)
+
+# Exemplo de uso
+bfs(grafo, 0)  # Saída: 0 1 2 3
                     </code></pre>
                 </div>
-            </div>
-
-            <h3><br>🌳 Percurso em Pós-ordem (Esquerda, Direita, Raiz)</h3><br>
-            <p>
-
-                <b>Etapa 1</b>: Percorre-se a subárvore esquerda de *T*, em pós-ordem.<br>
-
-                <b>Etapa 2</b>: Percorre-se a subárvore direita de *T*, em pós-ordem.<br>
-
-                <b>Etapa 3</b>: Visita-se a raiz.<br>
-
-                - A análise da complexidade é totalmente análoga à análise feita para pré-ordem e a ordem simétrica, o
-                que faz com que o algoritmo tenha complexidade O(n).</p>
-            <div class="code-examples">
-                <div class="code-block">
-                    <h3>Exemplo em Python</h3>
-                    <pre><code>
-def posOrdem(raiz):
-    if raiz is not None:
-        posOrdem(raiz.esquerdo)        # Esquerda
-        posOrdem(raiz.direito)         # Direita
-        print(raiz.valor, end=" ")     # Raiz
-                    </code></pre>
-                </div>
-            </div>
-            <div class="image-container">
-                <img src="https://pythonhelp.wordpress.com/wp-content/uploads/2015/01/image12.png"
-                    alt="Estrutura de Árvore Binária" class="tree-image">
             </div>
         </section>
 
-        <section id="operacoes" class="topic">
-            <h2>✨ Operações em Árvores</h2>
-            <p>Operações em árvores são os procedimentos fundamentais de conjuntos dinâmicos para manipular dados
-                armazenados em estruturas de árvore. As operações principais são seleção, inserção, remoção e a própria
-                busca.<br>
+        <section id="algoritmos" class="topic">
+            <h2> Algoritmos em Grafos</h2>
+            <p>Existem diversos algoritmos importantes que operam sobre grafos para resolver problemas específicos, como
+                encontrar componentes conexas, ordenação topológica e detecção de ciclos.
+                <br>
                 <div class="split-content">
                     <div class="content-left">
                         <h3 class="content-title">Características Principais:</h3>
-                        • As operações levam um tempo proporcional à altura da árvore.<br>
-                        • Para uma árvore completa de n nós, tais operações levam um tempo proporcional a O(log n).<br>
-                        • Se a árvore for uma lista de nós (ou seja, degenerada ou árvore zig-zag), as operações podem
-                        levar
-                        O(n).<br>
+                        • Algoritmos fundamentados em buscas DFS e BFS<br>
+                        • Aplicáveis a grafos direcionados e não-direcionados<br>
+                        • Diferentes complexidades dependendo do algoritmo<br>
+                        • Essenciais para resolver problemas práticos em computação<br>
             </p>
             </div>
             </div>
 
-            <br>
+            <h3> Algoritmo de Dijkstra</h3>
+            <p>O Algoritmo de Dijkstra encontra o caminho mais curto entre um vértice de origem e todos os outros em
+                grafos com pesos não-negativos.<br><br>
 
-            <h3>🌳 Inserção</h3><Br>
-            <p>- A inserção ocorre sempre em um novo nó folha, respeitando a regra: menores à esquerda, maiores à
-                direita.<br>
-                - Antes de inserir, é feita uma busca pela chave:<br>
-                - Se a chave já existe, não é inserida.<br>
-                - Se não existe, a busca retorna o nó pai onde o novo nó será ligado.<br>
-                - Caso especial: se a árvore estiver vazia, o novo nó vira a raiz.<br>
-                - A inserção percorre a árvore como na busca, parando ao encontrar um nó folha sem o filho
-                correspondente.<br>
-                - A nova chave é inserida como filho à esquerda se for menor, ou à direita se for maior.<br><br>
-                📊 <b>Complexidade:</b><br><br>
-                - A inserção depende da busca, que tem complexidade O(n) no pior caso (árvore desbalanceada).<br>
-                - A operação de inserir o nó após a busca é feita em tempo constante O(1).
+                <b> Funcionamento:</b><Br><br>
+
+                - Inicializa distâncias: origem = 0, outros = infinito<br>
+                - Mantém conjunto de vértices não processados<br>
+                - Repetidamente seleciona vértice não processado com menor distância<br>
+                - Atualiza distâncias dos vizinhos se um caminho menor for encontrado.<br>
+                - Continua até processar todos os vértices<br><br>
+
+                <b> Aplicações:</b><Br><br>
+                - Roteamento em redes de computadores (OSPF - Open Shortest Path First)<br>
+                - Sistemas GPS e mapas digitais<br>
+                - Planejamento de caminhos em robótica<br>
+                - Algoritmos de compressão de dados (Huffman utiliza conceitos similares)<br>
+
             </p>
             <div class="code-examples">
                 <div class="code-block">
-                    <h3>Exemplo em Python</h3>
+                    <h3>Exemplo em Python - Dijkstra</h3>
                     <pre><code>
-def inserir(raiz, valor):
-    if raiz is None:
-        return Node(valor)
-    
-    if valor < raiz.valor:
-        raiz.esquerdo = inserir(raiz.esquerdo, valor)
-    elif valor > raiz.valor:
-        raiz.direito = inserir(raiz.direito, valor)
-    
-    return raiz
+import heapq
 
-# Complexidade: O(log n) em média, O(n) no pior caso
+def dijkstra(grafo, origem):
+    distancias = {i: float('inf') for i in range(grafo.num_vertices)}
+    distancias[origem] = 0
+    pq = [(0, origem)]
+    visitado = set()
+    
+    while pq:
+        dist_atual, u = heapq.heappop(pq)
+        
+        if u in visitado:
+            continue
+        visitado.add(u)
+        
+        for v, peso in grafo.lista_adjacencia[u]:
+            if v not in visitado:
+                nova_dist = dist_atual + peso
+                if nova_dist < distancias[v]:
+                    distancias[v] = nova_dist
+                    heapq.heappush(pq, (nova_dist, v))
+    
+    return distancias
+
+# Complexidade: O((V + E) log V) com heap binário
                     </code></pre>
                 </div>
             </div>
-            <br><br>
-            <h3>🌳 Remoção</h3><br>
-            <p>A remoção é mais complexa que a inserção. Há três casos: remover folha (simples), remover com um filho
-                (simples) e remover com dois filhos (requer reestruturação).
+<br>
+            <h3> Algoritmo de Bellman-Ford</h3>
+            <p>O Algoritmo de Bellman-Ford encontra o caminho mais curto mesmo em grafos com pesos negativos, mas não
+                funciona com ciclos de peso negativo.<br><br>
 
+                <b> Funcionamento:</b><Br><br>
 
-                A remoção de um nó pode ocorrer em três casos distintos:<br><br>
-                - <b>Nó folha (sem filhos):</b><br><br>
-                - Basta desconectar o nó do seu pai.<br>
-                - Exemplo: remover o nó 4 → left do nó 6 aponta para None.<br>
-                <br>
-                - <b>Nó com um filho:</b><br><br>
-                - O pai do nó passa a apontar diretamente para o único filho do nó removido.<br>
-                - Exemplo: remover o nó 10 → nó 8 aponta para o nó 14.<br>
-                <br>
-                - <b>Nó com dois filhos:</b><br><br>
-                - Substituímos o nó pelo menor valor da subárvore direita (o sucessor).<br>
-                - Exemplo: remover o nó 3 → substituído pelo nó 4 (mais à esquerda da subárvore direita).<br>
-                <br>
-                📊 <b>Complexidade:</b><br><br>
-                Em todos os casos, a operação de remoção depende da busca, que tem custo O(n) no pior caso (árvore
-                desbalanceada). As demais operações são simples.
+                - Inicializa distâncias: origem = 0, outros = infinito<br>
+                - Relaxa todas as arestas V-1 vezes consecutivas<br>
+                - Após V-1 iterações, as distâncias mínimas são obtidas<br>
+                - Uma iteração adicional pode detectar ciclos negativos<br><br>
+
+                <b> Vantagens sobre Dijkstra:</b><Br><br>
+
+                - Funciona com arestas de peso negativo<br>
+                - Detecta ciclos de peso negativo<br>
+                - Mais flexível, mas mais lento que Dijkstra<br>
+
             </p>
             <div class="code-examples">
                 <div class="code-block">
-                    <h3>Exemplo em Python</h3>
+                    <h3>Exemplo em Python - Bellman-Ford</h3>
                     <pre><code>
-def remover(raiz, valor):
-    if raiz is None:
-        return None
+def bellman_ford(grafo, origem):
+    distancias = {i: float('inf') for i in range(grafo.num_vertices)}
+    distancias[origem] = 0
     
-    if valor < raiz.valor:
-        raiz.esquerdo = remover(raiz.esquerdo, valor)
-    elif valor > raiz.valor:
-        raiz.direito = remover(raiz.direito, valor)
-    else:
-        # Caso 1: Folha (sem filhos)
-        if raiz.esquerdo is None and raiz.direito is None:
-            return None
-        # Caso 2: Um filho
-        if raiz.esquerdo is None:
-            return raiz.direito
-        if raiz.direito is None:
-            return raiz.esquerdo
-        # Caso 3: Dois filhos
-        # encontrar sucessor e fazer rearranjo
+    # Relaxar arestas V-1 vezes
+    for _ in range(grafo.num_vertices - 1):
+        for u in range(grafo.num_vertices):
+            for v, peso in grafo.lista_adjacencia[u]:
+                if distancias[u] != float('inf'):
+                    if distancias[u] + peso < distancias[v]:
+                        distancias[v] = distancias[u] + peso
     
-    return raiz
+    # Detectar ciclo negativo
+    for u in range(grafo.num_vertices):
+        for v, peso in grafo.lista_adjacencia[u]:
+            if distancias[u] != float('inf'):
+                if distancias[u] + peso < distancias[v]:
+                    print("Ciclo negativo detectado!")
+                    return None
+    
+    return distancias
 
-# Complexidade: O(log n) em média, O(n) no pior caso
+# Complexidade: O(V * E)
                     </code></pre>
                 </div>
             </div>
-        </section>
+<br>
+            <h3> Algoritmo de Floyd-Warshall</h3>
+            <p>O Algoritmo de Floyd-Warshall é um algoritmo de programação dinâmica que encontra os caminhos mais curtos entre todos os pares de vértices em um grafo ponderado e direcionado. Ele é capaz de lidar com arestas de peso negativo, mas não com ciclos de peso negativo.<br><br>
 
-        <section id="arvoreavl" class="topic">
-            <h2>✨ Árvore AVL</h2>
-            <p></p>
-            <div class="split-content">
-                <div class="content-left">
-                    <h3 class="content-title">Características Principais:</h3>
-                    • Uma árvore binária de busca é uma AVL quando, para qualquer um de seus nós, a diferença entre as
-                    alturas de suas subárvores direita e esquerda é no máximo 1 (ou seja, deve ser equilibrada -
-                    BALANCEADA)<br>
-                    • É uma estrutura de dados completamente dinâmica que suporte inserções, remoções e buscas em O(log
-                    n).<br>
-                    • A altura mínima de uma árvore AVL é proporcional O(l*og n)*. Ou seja, suas operações levam tempo
-                    O(log n).<Br>
-                    • As árvores completas são AVL.<br>
-                    • Caso a árvore esteja desbalanceada, podemos balanceá-la através de rotações.
-                </div>
-            </div>
+                <b> Funcionamento:</b><Br><br>
 
-            <h3>🌳 Busca, Inserção e Remoção em Árvore AVL</h3>
-            <p>A inserção e remoção em AVL são similares à busca em árvore binária, mas após cada operação, o algoritmo
-                verifica o fator de balanceamento e realiza rotações se necessário para manter a árvore
-                balanceada.<br><br>
+                - Inicializa uma matriz de distâncias com os pesos das arestas diretas e infinito para pares não conectados.<br>
+                - Itera sobre todos os vértices (k) e os considera como um vértice intermediário no caminho entre outros dois vértices (i e j).<br>
+                - Para cada par (i, j), verifica se o caminho passando por k é mais curto que o caminho direto conhecido.<br>
+                - Após iterar por todos os vértices intermediários, a matriz contém os caminhos mais curtos entre todos os pares.<br><br>
 
-                <b>➖ Busca em AVL:</b><Br><br>
+                <b> Vantagens:</b><Br><br>
 
-                - Árvores AVL são árvores binárias de busca, ou seja, segume o mesmo algoritmo da árvore binária de busca.<br>
-                - Complexidade: nas árvores AVL, as piores árvores são as árvores de Fibonacci que têm altura proporcional a log n, sendo assim, a complexidade do algoritmo da busca, quando aplicado em árvores AVL, é O(log n). <br><br>
-
-                <b>➖ Inserção em AVL:</b><Br><br>
-                - A inserção em árvore AVL segue o mesmo algoritmo da árvore binária de busca.<br>
-                - Se a árvore se desbalancear com a inserção, é corrigida com rotações simples, que têm custo O(1).
-                - Por conta do balanceamento evita a formação de árvores "zig-zag" (desbalanceadas).<br>
-                - Mesmo no pior caso, são necessárias no máximo O(log n) rotações.<br><br>
-
-                <b>➖ Remoção em AVL:</b><Br><br>
-
-                - A remoção também pode exigir rebalanceamento por rotações até a raiz.<br>
-                - Cada rotação é simples (O(1)), e no máximo O(log n) rotações são feitas.<br>
-                - O pior caso da remoção é a remoção da folha menos profunda de uma árvore de Fibonacci. Neste caso, realizamos todas as rotações da folha removida até a raiz.<br>
+                - Encontra todos os caminhos mínimos de uma só vez.<br>
+                - Relativamente simples de implementar.<br>
+                - Detecta ciclos negativos<br>
 
             </p>
             <div class="code-examples">
                 <div class="code-block">
-                    <h3>Exemplo em Python (Inserção)</h3>
+                    <h3>Exemplo em Python - Floyd-Warshall</h3>
                     <pre><code>
-class AVLNode:
-    def __init__(self, valor):
-        self.valor = valor
-        self.altura = 1
-        self.esquerdo = None
-        self.direito = None
+def floyd_warshall(grafo):
+    num_vertices = grafo.num_vertices
+    dist = [[float('inf')] * num_vertices for _ in range(num_vertices)]
 
-def inserir_avl(raiz, valor):
-    if raiz is None:
-        return AVLNode(valor)
-    
-    if valor < raiz.valor:
-        raiz.esquerdo = inserir_avl(raiz.esquerdo, valor)
-    elif valor > raiz.valor:
-        raiz.direito = inserir_avl(raiz.direito, valor)
-    else:
-        return raiz
-    
-    # Atualizar altura
-    raiz.altura = 1 + max(obter_altura(raiz.esquerdo),
-                          obter_altura(raiz.direito))
-    
-    # Calcular fator de balanceamento
-    fator = obter_fator(raiz)
-    
-    # Rotações necessárias...
-    # Esquerda-Esquerda, Direita-Direita, etc.
-    
-    return raiz
+    for i in range(num_vertices):
+        dist[i][i] = 0
+        for vizinho, peso in grafo.lista_adjacencia[i]:
+            dist[i][vizinho] = peso
 
-# Complexidade: O(log n) garantido
+    for k in range(num_vertices):
+        for i in range(num_vertices):
+            for j in range(num_vertices):
+                if dist[i][k] + dist[k][j] < dist[i][j]:
+                    dist[i][j] = dist[i][k] + dist[k][j]
+    
+    return dist
+
+# Complexidade: O(V^3)
                     </code></pre>
                 </div>
             </div>
         </section>
 
-        <section id="balanceamento" class="topic">
-            <h2>✨ Balanceamento de Árvores Binárias</h2>
-            <p>O balanceamento de árvores binárias é uma técnica fundamental para manter a eficiência das operações. Uma árvore desbalanceada pode degenerar em uma lista ligada, degradando o desempenho para O(n). Diferentes estratégias de balanceamento garantem que a altura permaneça logarítmica.
+        <section id="aplicacoes" class="topic">
+            <h2> Aplicações de Grafos</h2>
+            <p>Grafos têm aplicações extensas em diversos campos da computação e tecnologia. São ferramentas poderosas
+                para modelar problemas complexos do mundo real.
                 <br>
-            <div class="split-content">
-                <div class="content-left">
-                    <h3 class="content-title">Características Principais:</h3><br>
-                    - Uma árvore balanceada mantém a diferença de altura entre subárvores mínima<br>
-                    - Rotações (esquerda e direita) são usadas para rebalancear<br>
-                    - Fator de balanceamento: altura(esquerda) - altura(direita)<br>
-                    - Garante complexidade O(log n) para busca, inserção e remoção<br>
-                    - Exemplos: AVL, Red-Black, B-trees<br>
-                </div>
-            </div><br>
+                <div class="split-content">
+                    <div class="content-left">
+                        <h3 class="content-title">Aplicações Principais:</h3><br>
+                        •  <b>Redes Sociais:</b> Usuários como vértices, amizades/seguimentos como arestas<br>
+                        •  <b>Roteamento:</b> Encontrar melhor caminho em redes (GPS, internet)<br>
+                        •  <b>Redes de Computadores:</b> Topologia de rede, protocolos de roteamento<br>
+                        •  <b>Biologia Computacional:</b> Análise de redes proteicas, filogenética<br>
+                        •  <b>Análise de Dependências:</b> Compiladores, gerenciadores de pacotes<br>
+                        •  <b>Problemas de Otimização:</b> Caixeiro Viajante (TSP), alocação de recursos<br>
+                    </div>
+                </div><br>
             </p>
 
-            <h3>🌳 Rotações em Árvores</h3>
-            <p>As rotações são operações fundamentais usadas para rebalancear árvores. Existem dois tipos principais: rotações simples (esquerda ou direita) e rotações duplas (esquerda-direita ou direita-esquerda).</p>
-            
+            <h3> Redes Sociais e Análise</h3>
+            <p>Grafos são a base para análise de redes sociais, permitindo estudar estruturas de comunidades,
+                influenciadores e padrões de propagação.</p>
+
             <div class="code-examples">
                 <div class="code-block">
-                    <h3>Rotação Simples (Python)</h3><br>
+                    <h3>Análise de Centralidade (Python)</h3><br>
                     <pre><code>
-def rotacao_direita(no):
-    """Rotação simples para direita"""
-    novo_raiz = no.esquerdo
-    no.esquerdo = novo_raiz.direito
-    novo_raiz.direito = no
-    
-    # Atualizar alturas
-    no.altura = 1 + max(obter_altura(no.esquerdo), obter_altura(no.direito))
-    novo_raiz.altura = 1 + max(obter_altura(novo_raiz.esquerdo), obter_altura(novo_raiz.direito))
-    
-    return novo_raiz
+def centralidade_grau(grafo):
+    """Retorna o grau de cada vértice"""
+    centralidades = {}
+    for i in range(grafo.num_vertices):
+        centralidades[i] = len(grafo.lista_adjacencia[i])
+    return centralidades
 
-def rotacao_esquerda(no):
-    """Rotação simples para esquerda"""
-    novo_raiz = no.direito
-    no.direito = novo_raiz.esquerdo
-    novo_raiz.esquerdo = no
-    
-    # Atualizar alturas
-    no.altura = 1 + max(obter_altura(no.esquerdo), obter_altura(no.direito))
-    novo_raiz.altura = 1 + max(obter_altura(novo_raiz.esquerdo), obter_altura(novo_raiz.direito))
-    
-    return novo_raiz
+def vertices_mais_conectados(grafo, k=3):
+    """Retorna os k vértices mais conectados"""
+    centralidades = centralidade_grau(grafo)
+    return sorted(centralidades.items(), 
+                  key=lambda x: x[1], 
+                  reverse=True)[:k]
+
+# Exemplo de uso
+top_3 = vertices_mais_conectados(grafo, 3)
+print("Vértices mais influentes:", top_3)
                     </code></pre>
                 </div>
             </div><Br>
 
-            <h3>🌳 Rotações Duplas</h3><br>
-            <p>Rotações duplas são necessárias quando um desbalanceamento é causado por um nó na direção oposta. Combinam duas rotações simples em sequência.</p>
-            
+            <h3> Problemas Clássicos em Grafos</h3><br>
+            <p>• Existem diversos problemas clássicos em teoria dos grafos que têm aplicações práticas importantes e
+                servem como base para algoritmos mais avançados.</p>
+                <P>
+                • O Problema do Caixeiro Viajante (PCV) é um problema clássico de otimização combinatória que busca encontrar a rota mais curta possível para um caixeiro visitar um conjunto de cidades, retornando sempre à cidade de origem após visitar cada cidade exatamente uma vez. Ele é extremamente complexo e classificado como NP-difícil, o que significa que encontrar uma solução ótima para um grande número de cidades é computacionalmente inviável. </P>
+
+
             <div class="code-examples">
                 <div class="code-block">
-                    <h3>Rotação Dupla (Python)</h3>
+                    <h3>Problema do Caixeiro Viajante - Aproximação</h3>
                     <pre><code>
-def rotacao_esquerda_direita(no):
-    """Rotação dupla: esquerda depois direita"""
-    no.esquerdo = rotacao_esquerda(no.esquerdo)
-    return rotacao_direita(no)
+def tsp_aproximacao_gulosa(matriz_distancias, inicio=0):
+    """Aproximação gulosa para o Caixeiro Viajante"""
+    n = len(matriz_distancias)
+    visitado = [False] * n
+    visitado[inicio] = True
+    rota = [inicio]
+    custoTotal = 0
+    
+    while len(rota) < n:
+        ultimo = rota[-1]
+        proximo = -1
+        menorDist = float('inf')
+        
+        for j in range(n):
+            if not visitado[j] and matriz_distancias[ultimo][j] < menorDist:
+                menorDist = matriz_distancias[ultimo][j]
+                proximo = j
+        
+        rota.append(proximo)
+        visitado[proximo] = True
+        custoTotal += menorDist
+    
+    # Voltar ao vértice inicial
+    custoTotal += matriz_distancias[rota[-1]][inicio]
+    
+    return rota, custoTotal
 
-def rotacao_direita_esquerda(no):
-    """Rotação dupla: direita depois esquerda"""
-    no.direito = rotacao_direita(no.direito)
-    return rotacao_esquerda(no)
-
-# Exemplo de uso em inserção com balanceamento
-def inserir_balanceado(raiz, valor):
-    if raiz is None:
-        return Node(valor)
-    
-    if valor < raiz.valor:
-        raiz.esquerdo = inserir_balanceado(raiz.esquerdo, valor)
-    else:
-        raiz.direito = inserir_balanceado(raiz.direito, valor)
-    
-    # Calcular fator de balanceamento
-    fator = obter_altura(raiz.esquerdo) - obter_altura(raiz.direito)
-    
-    # Caso esquerda-esquerda
-    if fator > 1 and obter_fator(raiz.esquerdo) >= 0:
-        return rotacao_direita(raiz)
-    
-    # Caso direita-direita
-    if fator < -1 and obter_fator(raiz.direito) <= 0:
-        return rotacao_esquerda(raiz)
-    
-    # Caso esquerda-direita
-    if fator > 1 and obter_fator(raiz.esquerdo) < 0:
-        return rotacao_esquerda_direita(raiz)
-    
-    # Caso direita-esquerda
-    if fator < -1 and obter_fator(raiz.direito) > 0:
-        return rotacao_direita_esquerda(raiz)
-    
-    return raiz
+# TSP é NP-completo, aproximações são frequentemente usadas
                     </code></pre>
                 </div>
             </div>
@@ -612,8 +550,6 @@ def inserir_balanceado(raiz, valor):
     </main>
 
     <footer>
-        <p>🌸 Luana Santini: Sistemas de Informação - Estácio Florianópolis - Matrícula 202308416251🌸</p>
+        <p> Luana Santini: Sistemas de Informação - Estácio Florianópolis - Matrícula 202308416251</p>
     </footer>
 </body>
-
-</html>

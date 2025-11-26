@@ -12,7 +12,6 @@ Este projeto é um site educacional que apresenta um **guia completo sobre grafo
 
 - ✨ Conceitos fundamentais
 - 📚 Tipos de grafos (direcionados, ponderados, etc)
-- 🔍 Representações (matriz e lista de adjacência)
 - 🎯 Algoritmos de busca (DFS, BFS)
 - 🛤️ Algoritmos de caminhos mínimos (Dijkstra, Bellman-Ford)
 - 🌐 Aplicações práticas
@@ -24,11 +23,10 @@ Este projeto é um site educacional que apresenta um **guia completo sobre grafo
 
 1. **Conceitos Fundamentais** - Definições de vértices, arestas, graus, caminhos e ciclos
 2. **Tipos de Grafos** - Classificações e características de diferentes tipos
-3. **Representação de Grafos** - Comparação entre matriz e lista de adjacência
-4. **Buscas em Grafos** - DFS e BFS com implementações
-5. **Algoritmos Importantes** - Componentes conexas e ordenação topológica
-6. **Caminhos Mínimos** - Dijkstra e Bellman-Ford
-7. **Aplicações Práticas** - Casos reais de uso em redes e otimização
+3. **Buscas em Grafos** - DFS e BFS com implementações
+4. **Algoritmos Importantes** - Componentes conexas e ordenação topológica
+5. **Caminhos Mínimos** - Dijkstra e Bellman-Ford
+6. **Aplicações Práticas** - Casos reais de uso em redes e otimização
 
 ### Tecnologias
 
